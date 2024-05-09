@@ -65,7 +65,7 @@ export default class RenderCookie extends Component {
 - 결국 이도 javascript인 것에 주의!
   - Ex. html 속성으로 class 사용 못하고 className 으로 써야한다.
   - Ex2. src도 url로 못쓰고, {} 사용해서 묶어서 가져와야 함
-- **변수 사용**: {변수명}
+- **변수 사용**: {변수명} - {} 안에는 객체가 전달된다!
 
 #### index.css  
 - 기본 css, Default이다.  
@@ -73,3 +73,9 @@ export default class RenderCookie extends Component {
 ### 컴포넌트
 - **컴포넌트**: 화면을 나타내는 기본 단위
 - 컴포넌트 이름은 대문자로 시작하는 게 관례이다!
+
+### Props롸 State
+- Props (Properties): 부모 컴포넌트로 전달받는 파라미터!
+- 컴포넌트를 재사용이 가능하도록 하는 핵심!
+- 컴포넌트가 생성될 때 부모로부터 전달 받음
+- 컴포넌트 자체에서 ㅂ
