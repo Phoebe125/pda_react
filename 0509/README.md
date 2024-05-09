@@ -78,4 +78,4 @@ export default class RenderCookie extends Component {
 - Props (Properties): 부모 컴포넌트로 전달받는 파라미터!
 - 컴포넌트를 재사용이 가능하도록 하는 핵심!
 - 컴포넌트가 생성될 때 부모로부터 전달 받음
-- 컴포넌트 자체에서 ㅂ
+- 컴포넌트 자체에서 변화시킬 수 없음
