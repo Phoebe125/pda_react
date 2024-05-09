@@ -87,3 +87,13 @@ export default class RenderCookie extends Component {
   - `this.state={}`: class
   - `useState()`: function
 - 클래스형 컴포넌트는 잘 안씀, LifeCycle API를 이용해야 할 경우에 사용
+
+
+### Hook
+- Hook을 사용하면, 모든 컴포넌트까지 (함수형) 독립적으로 재사용가능
+- Hook의 종류
+
+- `useEffect(callbackFunction, dependencyArray)`
+- 두 번째 있는 dependency array가 변화하면, 첫 번째 인자인 Callback 함수를 호출함
+- 만일 두 번째 인자인 array가 비워져 있으면, Mount 될 때 (컴포넌트가 생길 때, `const [count, setCount] = useState(0);`) 한 번만 호출한다.
+    
