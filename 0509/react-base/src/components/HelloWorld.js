@@ -1,6 +1,6 @@
 import React from "react";
 import "./HelloWorld.css";
-// import Style from './HelloWorld.module.css';
+import Style from './HelloWorld.module.css';
 import logo from "../logo.svg";
 
 export default function HelloWorld() {
@@ -17,10 +17,10 @@ export default function HelloWorld() {
                 <p>This is my first React Application.</p>
             </div>
             {/* 3. Object 처럼 사용하는 방법! */}
-            {/* <div style={Style.HelloWorld}>
+            <div className={Style.container}>
                 <h1>Hello, World!</h1>
                 <p>This is my first React Application.</p>
-            </div> */}
+            </div>
             <img src={logo}></img>
         </div>    
     )
