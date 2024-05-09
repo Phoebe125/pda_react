@@ -3,7 +3,7 @@ import "./HelloWorld.css";
 import Style from './HelloWorld.module.css';
 import logo from "../logo.svg";
 
-export default function HelloWorld() {
+function HelloWorld() {
     return (
         <div>
             {/* 1. css 파일을 별도로 두고, 적용하는 방법 */}
@@ -25,3 +25,5 @@ export default function HelloWorld() {
         </div>    
     )
 }
+
+export default HelloWorld;

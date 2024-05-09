@@ -75,7 +75,14 @@ export default class RenderCookie extends Component {
 - 컴포넌트 이름은 대문자로 시작하는 게 관례이다!
 
 ### Props롸 State
-- Props (Properties): 부모 컴포넌트로 전달받는 파라미터!
+- **Props (Properties)**: 부모 컴포넌트로 전달받는 파라미터!
 - 컴포넌트를 재사용이 가능하도록 하는 핵심!
 - 컴포넌트가 생성될 때 부모로부터 전달 받음
 - 컴포넌트 자체에서 변화시킬 수 없음
+
+- **State**
+- State는 Props와 다르게 컴포넌트 자체적으로 가지고 있는 것.
+- 컴포넌트 내에서 저장되고 유저의 이벤트나 시간에 따라 변화시킬 수 있는 값
+- 초기화가 반드시 필요.
+  - `this.state={}`
+  - `useState()`
