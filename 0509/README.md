@@ -39,6 +39,7 @@ export default class RenderCookie extends Component {
 - src/*: 실제 code
 - package.json: 프로젝트 (application)의 정체성
 
+### react app의 디렉토리 구조
 ### package.json
 ```json
 "scripts": {
@@ -56,14 +57,19 @@ export default class RenderCookie extends Component {
 - 만일 JSX를 사용하지 않으면, 코드를 일일히 적어야 해서 가독성이 안좋고, 비용이 증가한다.  
 
 ### ./src  
-#### index.js  
+#### 1. index.js  
 - `<React.StrictMode>` : 디버깅 용  
 - `<App>` : App.js에 있는 App() 호출  
 
-#### App.js
+#### 2. App.js
 - 결국 이도 javascript인 것에 주의!
   - Ex. html 속성으로 class 사용 못하고 className 으로 써야한다.
   - Ex2. src도 url로 못쓰고, {} 사용해서 묶어서 가져와야 함
+- **변수 사용**: {변수명}
 
 #### index.css  
 - 기본 css, Default이다.  
+
+### 컴포넌트
+- **컴포넌트**: 화면을 나타내는 기본 단위
+- 컴포넌트 이름은 대문자로 시작하는 게 관례이다!
