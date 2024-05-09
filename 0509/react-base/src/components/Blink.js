@@ -33,3 +33,23 @@ export default function BlinkComponent({ text }) {
 
   return <div>{showText ? text : null}</div>;
 }
+
+// 동인언니와의 삽질...
+// import React, { useEffect, useState } from "react";
+
+// export default function BlinkComponent({ text }) {
+//   const [showText, setShowText] = useState(1);
+//   console.log(showText, "입니다");
+
+//   useEffect(() => {
+//     const intervalID = setInterval(() => {
+//       setShowText((prev)=>prev+1);
+//     }, 1000);
+//     console.log(intervalID);
+//     return () => {
+//       console.log(intervalID, "사라짐");
+//       clearInterval(intervalID);
+//     };
+//   }, []);
+//   return <div>{showText}</div>;
+// }
