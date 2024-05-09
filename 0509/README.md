@@ -84,5 +84,6 @@ export default class RenderCookie extends Component {
 - State는 Props와 다르게 컴포넌트 자체적으로 가지고 있는 것.
 - 컴포넌트 내에서 저장되고 유저의 이벤트나 시간에 따라 변화시킬 수 있는 값
 - 초기화가 반드시 필요.
-  - `this.state={}`
-  - `useState()`
+  - `this.state={}`: class
+  - `useState()`: function
+- 클래스형 컴포넌트는 잘 안씀, LifeCycle API를 이용해야 할 경우에 사용
