@@ -18,4 +18,7 @@
 
 ### useMEmo(callBackFunc, deps:Array)
 - 값을 메모이제이션 (Memoization - 잠깐 저장)
-- 
+
+### useCallback(callBackFunc, deps:Array):
+- 함수를 정의하는 것도 비용이다! 함수 정의도 dependency가 변경될 때에만 재정의
+하도록

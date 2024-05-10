@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 
 // 소수를 계산하는 함수
 function calculatePrimes(limit) {
@@ -30,6 +30,7 @@ export default function PrimeCaculator(props) {
   const primes = useMemo(() => calculatePrimes(limit), [limit]); // callbackFunction, Dependency Array 순으로 넣음
   // "limit이 바뀔 때만", callback 함수의 return 값을 primes 변수에 저장할 것이야
   // 성능의 최적화를 할때만 사용한다.
+  // Callback Function의 결과를 반환함 -> 이를 저장함
 
   const addCount = () => {
     setCount(count + 1);
@@ -44,7 +45,9 @@ export default function PrimeCaculator(props) {
         value={limit}
         onChange={(e) => setLimit(Number(e.target.value))}
       />
-      <p>계산된 소수: {primes.join(", ")}</p>
+      <p>
+        <strong>계산된 소수: </strong> {primes.join(", ")}
+      </p>
     </div>
   );
 }
