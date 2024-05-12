@@ -74,7 +74,7 @@ import SearchItem from "./SearchItem";
 //   );
 // }
 
-
+// 모듈화
 export default function Sample() {
     const [text, setText] = useState("");
     const [color, setColor] = useState("");
@@ -83,9 +83,9 @@ export default function Sample() {
     const sessionArrString = window.sessionStorage.getItem("data");
     const sessionArr = sessionArrString ? JSON.parse(sessionArrString) : null;
     const [arr, setArr] = useState(sessionArr || [
-        { text: "1", backgroundColor: "#FFC0CB" },
-        { text: "2", backgroundColor: "#FFFF00" },
-        { text: "3", backgroundColor: "#00FFFF" },
+        { id: 1, text: "1", backgroundColor: "#FFC0CB" },
+        { id: 2, text: "2", backgroundColor: "#FFFF00" },
+        { id: 3, text: "3", backgroundColor: "#00FFFF" },
     ]);
     
     useEffect(() => {

@@ -1,9 +1,9 @@
-import React, { useState, useRef, useCallback } from "react";
+import React, {useRef} from "react";
 
 export default function TodoInput({text, setText, setArr, color}) {
     const inputRef = useRef();
     const submitInput = () => {
-        setArr((arr) => [...arr, {text: text, backgroundColor: color}]);
+        setArr((arr) => [...arr, {id: arr.length > 0 ? arr[arr.length - 1].id + 1 : 1, text: text, backgroundColor: color}]);
     };
     
   return (
