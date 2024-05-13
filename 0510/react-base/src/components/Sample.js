@@ -98,7 +98,7 @@ export default function Sample() {
           <TodoInput text={text} setText={setText} setArr={setArr} color={color} idx={idx} setIdx={setIdx}/>
           <Colorbar setColor={setColor}/>
           <SearchItem search={search} setSearch={setSearch}/>
-          <TodoList arr={arr} search={search} setArr={setArr}/>
+          <TodoList arr={arr} search={search} setArr={setArr} text={text} setText={setText}/>
       </div>
     );
   }

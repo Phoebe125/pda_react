@@ -71,7 +71,7 @@ export default function ThememButton() {
 - shadcn-ui
   - <a href="https://ui.shadcn.com/">https://ui.shadcn.com/</a> 
 - fluent ui
-  - <a href="https://react.fluentui.dev/"></a>
+  - <a href="https://react.fluentui.dev/">https://react.fluentui.dev/</a>
 - ariakit
   - <a href="https://ariakit.org/guide/getting-started">https://ariakit.org/guide/getting-started</a>
 
