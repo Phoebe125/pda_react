@@ -79,22 +79,23 @@ export default function Sample() {
     const [text, setText] = useState("");
     const [color, setColor] = useState("");
     const [search, setSearch] = useState("");
+    const [idx, setIdx] = useState(0); // div tag들의 id 값
 
     const sessionArrString = window.sessionStorage.getItem("data");
     const sessionArr = sessionArrString ? JSON.parse(sessionArrString) : null;
-    const [arr, setArr] = useState(sessionArr || [
-        { id: 1, text: "1", backgroundColor: "#FFC0CB" },
-        { id: 2, text: "2", backgroundColor: "#FFFF00" },
-        { id: 3, text: "3", backgroundColor: "#00FFFF" },
-    ]);
-    
+    const [arr, setArr] = useState(sessionArr || []);
+
+        // { id: 1, text: "1", backgroundColor: "#FFC0CB" },
+        // { id: 2, text: "2", backgroundColor: "#FFFF00" },
+        // { id: 3, text: "3", backgroundColor: "#00FFFF" },
+        
     useEffect(() => {
         window.sessionStorage.setItem('data', JSON.stringify(arr));
     }, [arr]);
     
     return (
       <div>
-          <TodoInput text={text} setText={setText} setArr={setArr} color={color}/>
+          <TodoInput text={text} setText={setText} setArr={setArr} color={color} idx={idx} setIdx={setIdx}/>
           <Colorbar setColor={setColor}/>
           <SearchItem search={search} setSearch={setSearch}/>
           <TodoList arr={arr} search={search} setArr={setArr}/>

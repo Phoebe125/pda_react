@@ -4,7 +4,6 @@ import PrimeCaculator from "./components/PrimeCaculator";
 import CountComponent from "./components/CountComponent";
 import Sample from "./components/Sample";
 import SampleAnswer from "./components/SampleAnswer";
-import { ThemeProvider } from "../../../0513/react-base/src/components/ThemeProvider";
 
 function App() {
   
