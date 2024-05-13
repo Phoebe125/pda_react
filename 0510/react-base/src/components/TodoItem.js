@@ -1,13 +1,15 @@
 import React, { useState, useRef } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
+import useTodo from "./useTodo";
 
 export default function TodoItem({ elem, arr, setArr }) {
   const [update, setUpdate] = useState(false);
   const [updateContext, setUpdateContext] = useState("");
   const [updateId, setUpdateId] = useState(0);
+  const [updateColor, setUpdateColor ] = useState("");
   const updateRef = useRef();
-
+  
   const deleteTodo = (e) => {
     const tmpArr = arr.filter(
       (item) => parseInt(item.id) !== parseInt(e.currentTarget.parentNode.id)
@@ -19,7 +21,8 @@ export default function TodoItem({ elem, arr, setArr }) {
     const tmp =e.target.parentNode.querySelector("span").textContent;
     setUpdateId((prevId) => parseInt(e.target.parentNode.id));
     setUpdate((prevState) => !prevState);
-    setUpdateContext((prevUpdate) => tmp)
+    setUpdateContext((prevUpdate) => tmp);
+    setUpdateColor(prevColor=>e.target.parentNode.style.backgroundColor)
   };
 
   const submitUpdate = (e) => {
@@ -33,7 +36,7 @@ export default function TodoItem({ elem, arr, setArr }) {
           newArr.push({
             id: updateId,
             text: updateContext,
-            backgroundColor: elem.backgroundColor,
+            backgroundColor: updateColor,
           });
         } else {
           newArr.push(arr[i]);
@@ -65,16 +68,18 @@ export default function TodoItem({ elem, arr, setArr }) {
     <div
       id={elem.id}
       style={{
+        display: "flex",
         padding: "10px",
         width: "500px",
         backgroundColor: elem.backgroundColor,
+        lineHeight:"100%",
       }}
     >
-      <span>{elem.text}</span>
-      <Button variant="primary" onClick={updateTodo}>
+      <span style={{display:"flex", alignItems: "center", margin:"0 auto", lineHeight:"100%"}}>{elem.text}</span>
+      <Button style={{margin:"0 10px"}} variant="outline-dark" onClick={updateTodo}>
         수정
       </Button>
-      <Button variant="primary" onClick={deleteTodo}>
+      <Button variant="outline-dark" onClick={deleteTodo}>
         삭제
       </Button>
     </div>
