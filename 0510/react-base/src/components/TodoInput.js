@@ -1,6 +1,10 @@
 import React, {useRef} from "react";
+import { useAddTodoList } from "./useTodo";
 
-export default function TodoInput({text, setText, setArr, color, idx, setIdx}) {
+
+export default function TodoInput() {
+    const { text, setText, setArr, color, idx, setIdx } = useAddTodoList();
+
     const inputRef = useRef();
     const submitInput = () => {
         setArr((arr) => [...arr, {id: idx, text: text, backgroundColor: color}]);

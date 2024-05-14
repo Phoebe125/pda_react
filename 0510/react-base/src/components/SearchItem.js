@@ -1,6 +1,6 @@
 import React, {useRef} from "react";
 
-export default function SearchItem({search, setSearch, arr, setArr}){
+export default function SearchItem({search, setSearch}){
     const searchRef = useRef();
     const submitSearch = () => {
         setSearch(search);

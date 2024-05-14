@@ -1,6 +1,8 @@
 import React from "react";
+import {useColor} from "./useTodo"
 
-export default function Colorbar({setColor}) {    
+export default function Colorbar() {
+    const {setColor} = useColor()     
     const changeColor = (e) => {
         setColor(e.target.style.backgroundColor);
     };

@@ -1,7 +1,9 @@
 import React from "react";
 import TodoItem from "./TodoItem";
+import { useTodoList } from "./useTodo";
 
-export default function TodoList({ arr, search, setArr, text, setText }) {
+export default function TodoList({search}) {
+  const { arr } = useTodoList();
   return (
     <div
       style={{
@@ -15,9 +17,9 @@ export default function TodoList({ arr, search, setArr, text, setText }) {
     >
       <div style={{ fontSize: "30px", marginBottom: "20px" }}>Todo Items</div>
 
-      {arr.map((elem, i) =>
+      {arr?.map((elem, i) =>
         !search || search === elem.text ? (
-          <TodoItem elem={elem} key={elem.id} arr={arr} setArr={setArr} text={text} setText={setText} />
+          <TodoItem elem={elem} key={i}/>
         ) : null,
       )}
     </div>

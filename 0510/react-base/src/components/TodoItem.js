@@ -1,50 +1,12 @@
-import React, { useState, useRef } from "react";
+import React, { useRef } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
-import useTodo from "./useTodo";
+import {useRemoveTodo, useUpdateTodo} from "./useTodo";
 
-export default function TodoItem({ elem, arr, setArr }) {
-  const [update, setUpdate] = useState(false);
-  const [updateContext, setUpdateContext] = useState("");
-  const [updateId, setUpdateId] = useState(0);
-  const [updateColor, setUpdateColor ] = useState("");
+export default function TodoItem({ elem }) {
+  const removeTodo = useRemoveTodo();  
+  const {update, updateContext, setUpdateContext, updateTodo, submitUpdate} = useUpdateTodo();
   const updateRef = useRef();
-  
-  const deleteTodo = (e) => {
-    const tmpArr = arr.filter(
-      (item) => parseInt(item.id) !== parseInt(e.currentTarget.parentNode.id)
-    );
-    setArr((arr) => tmpArr);
-  };
-
-  const updateTodo = (e) => {
-    const tmp =e.target.parentNode.querySelector("span").textContent;
-    setUpdateId((prevId) => parseInt(e.target.parentNode.id));
-    setUpdate((prevState) => !prevState);
-    setUpdateContext((prevUpdate) => tmp);
-    setUpdateColor(prevColor=>e.target.parentNode.style.backgroundColor)
-  };
-
-  const submitUpdate = (e) => {
-    setUpdate((prevState) => !prevState);
-
-    setArr((arr) => {
-      const newArr = [];
-
-      for (let i = 0; i < arr.length; i++) {
-        if (parseInt(arr[i].id) === parseInt(updateId)) {
-          newArr.push({
-            id: updateId,
-            text: updateContext,
-            backgroundColor: updateColor,
-          });
-        } else {
-          newArr.push(arr[i]);
-        }
-      }
-      return newArr;
-    });
-  };
 
   return update ? (
     <div
@@ -79,7 +41,7 @@ export default function TodoItem({ elem, arr, setArr }) {
       <Button style={{margin:"0 10px"}} variant="outline-dark" onClick={updateTodo}>
         수정
       </Button>
-      <Button variant="outline-dark" onClick={deleteTodo}>
+      <Button variant="outline-dark" onClick={(e)=>removeTodo(e)}>
         삭제
       </Button>
     </div>

@@ -1,8 +1,9 @@
-import React, { useState, useEffect} from "react";
-import TodoInput from "./TodoInput"
-import Colorbar from "./Colorbar"
-import TodoList from "./TodoList"
+import React, { useState, useEffect } from "react";
+import TodoInput from "./TodoInput";
+import Colorbar from "./Colorbar";
+import TodoList from "./TodoList";
 import SearchItem from "./SearchItem";
+import { TodoProvider } from "./useTodo";
 
 // 0. componoent 분리 없이
 // export default function Sample() {
@@ -75,32 +76,41 @@ import SearchItem from "./SearchItem";
 // }
 
 // 모듈화
+// export default function Sample() {
+//     const [text, setText] = useState("");
+//     const [color, setColor] = useState("");
+//     const [search, setSearch] = useState("");
+//     const [idx, setIdx] = useState(0); // div tag들의 id 값
+
+//     const sessionArrString = window.sessionStorage.getItem("data");
+//     const sessionArr = sessionArrString ? JSON.parse(sessionArrString) : null;
+//     const [arr, setArr] = useState(sessionArr || []);
+
+//     useEffect(() => {
+//         window.sessionStorage.setItem('data', JSON.stringify(arr));
+//     }, [arr]);
+
+//     return (
+//       <div>
+//           <TodoInput text={text} setText={setText} setArr={setArr} color={color} idx={idx} setIdx={setIdx}/>
+//           <Colorbar setColor={setColor}/>
+//           <SearchItem search={search} setSearch={setSearch}/>
+//           <TodoList arr={arr} search={search} setArr={setArr} text={text} setText={setText}/>
+//       </div>
+//     );
+//   }
+
 export default function Sample() {
-    const [text, setText] = useState("");
-    const [color, setColor] = useState("");
-    const [search, setSearch] = useState("");
-    const [idx, setIdx] = useState(0); // div tag들의 id 값
+  const [search, setSearch] = useState("");
 
-    const sessionArrString = window.sessionStorage.getItem("data");
-    const sessionArr = sessionArrString ? JSON.parse(sessionArrString) : null;
-    const [arr, setArr] = useState(sessionArr || []);
-
-        // { id: 1, text: "1", backgroundColor: "#FFC0CB" },
-        // { id: 2, text: "2", backgroundColor: "#FFFF00" },
-        // { id: 3, text: "3", backgroundColor: "#00FFFF" },
-        
-    useEffect(() => {
-        window.sessionStorage.setItem('data', JSON.stringify(arr));
-    }, [arr]);
-    
-    return (
-      <div>
-          <TodoInput text={text} setText={setText} setArr={setArr} color={color} idx={idx} setIdx={setIdx}/>
-          <Colorbar setColor={setColor}/>
-          <SearchItem search={search} setSearch={setSearch}/>
-          <TodoList arr={arr} search={search} setArr={setArr} text={text} setText={setText}/>
-      </div>
-    );
-  }
-  
-
+  return (
+    <div>
+      <TodoProvider>
+        <TodoInput />
+        <Colorbar />
+        <SearchItem search={search} setSearch={setSearch} />
+        <TodoList search={search} />
+      </TodoProvider>
+    </div>
+  );
+}
