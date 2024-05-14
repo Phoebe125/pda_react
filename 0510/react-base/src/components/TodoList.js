@@ -17,7 +17,6 @@ export default function TodoList({search}) {
       }}
     >
       <div style={{ fontSize: "30px", marginBottom: "20px" }}>Todo Items</div>
-
       {arr?.map((elem, i) =>
         !search || search === elem.text ? (
           <TodoItem elem={elem} key={i}/>
