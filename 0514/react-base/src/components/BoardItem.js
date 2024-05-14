@@ -45,11 +45,12 @@ export default function BoardItem({ elem, setDel, boardArr, setboardArr }) {
 
   const submitDiv = (e) => {
     const idx = parseInt(e.target.parentNode.parentNode.id);
+    const userId = idx >= 10 ? Math.floor(idx / 10) + 1 : 1;
     const body = {
       id: idx,
       title: updateTitle,
       body: updateContent,
-      userId: idx,
+      userId: userId,
     };
     postData(idx, body)
       .then((responses) => {

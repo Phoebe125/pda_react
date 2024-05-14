@@ -15,3 +15,10 @@ import { v4 as uuidv4 } from "uuid";
 
 const todos = [...todoList, {id: uuidv4(), text, color}]
 ```
+
+### HOC
+- 컴포넌트 로직 재사용 패턴!  
+- Hook이 나온 이유로 잘 사용되지는 않지만, 유용할 때가 존재함.  
+  - 컴포넌트에 props를 추가해주거나,  
+  - 컴포넌트 랜더링 전에 어떤 로직을 처리하거나  
+  - **특히 그 props를 추가해주거나 로직을 처리하는 것을 재사용할 때에!**  

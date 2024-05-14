@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import BoardList from "./BoardList";
+import InputItem from "./InputItem";
 import axios from "axios";
 
 function getData(idx) {
@@ -7,10 +8,10 @@ function getData(idx) {
   return axios.get(url).then((response) => response.data); // 데이터를 반환하도록 수정
 }
 
-export default function Main() {
+export default function Main({ writeMode, setWriteMode }) {
   const [del, setDel] = useState("");
   const [boardArr, setboardArr] = useState([]);
-  
+
   useEffect(() => {
     Promise.all(
       Array(100)
@@ -18,20 +19,26 @@ export default function Main() {
         .map((_, i) => i + 1)
         .map((elem) => getData(elem))
     )
-    .then((responses) => {
-      setboardArr(responses);
-    })
-    .catch((error) => {
-      console.error("Error fetching data:", error);
-    });
+      .then((responses) => {
+        setboardArr(responses);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
   }, []);
 
-  return (
+  return !writeMode ? (
     <div>
-      <div style={{fontSize:"3rem", textAlign:"center", margin:"20px 0"}}>📌 BOARD</div>
-      <div style={{}}>
-        <BoardList boardArr={boardArr} del={del} setDel={setDel} setboardArr={setboardArr}/>
-      </div>
+      <InputItem boardArr={boardArr} setboardArr={setboardArr} setWriteMode={setWriteMode}/>
+    </div>
+  ) : (
+    <div>
+      <BoardList
+        boardArr={boardArr}
+        del={del}
+        setDel={setDel}
+        setboardArr={setboardArr}
+      />
     </div>
   );
 }
