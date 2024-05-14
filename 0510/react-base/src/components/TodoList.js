@@ -9,7 +9,8 @@ export default function TodoList({search}) {
       style={{
         display: "flex",
         flexDirection: "column",
-        margin: "40px auto",
+        margin: "0 auto",
+        marginBottom: "40px",
         width: "500px",
         alignItems: "center",
         textAlign: "center",
