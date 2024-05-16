@@ -52,7 +52,7 @@
 
 - Database: RDB의 스키마
 - Collection: RDB의 테이블
-- Document: RDB의 Row => 각 Document는 _id라는 고유한 값을 가짐
+- Document: RDB의 Row => 각 Document는 \_id라는 고유한 값을 가짐
 - Database는 0개 이상의 Collection들의 집합으로 구성되며
 - Collection은 0개 이상의 Document로 구성되고,
 - Document는 1개 이상의 field로 구성된다.
@@ -78,10 +78,11 @@
 - 진입점: `/bin/www`
 - module이 아닌 commonjs이 default로 되어있음 -> 우리도 여기서 이를 따를 것
 - `node_modules`가 없음: `npm install` 해줘야 한다!
-- `npm run start` :  script에 정의된 start가 실행된다.
+- `npm run start` : script에 정의된 start가 실행된다.
 - 파일이 한번에 너무 많이 생겨서 디렉토리가 복잡하다 : package.json 보기
 - app.js 수정하는 경우 -> 다시 껐다가 켜야한다 ㅠ -> 수정하면 알아서 적용! `npm install --save-dev nodemon`
 - package.json에서 script 수정
+
 ```json
 "scripts": {
     "start": "node ./bin/www",
@@ -90,109 +91,133 @@
 ```
 
 ### 라우터
+
 - post는 여기로 가고~ board는 저기로 가고~ 이렇게 교통 정리해주는게 라우터
-- /routes: routing에 필요한 파일들 모아 있는 디렉토리 
+- /routes: routing에 필요한 파일들 모아 있는 디렉토리
 - 인자: serving할 url, controller
 
 - index.js
+
 ```jsx
-var express = require('express');
+var express = require("express");
 var router = express.Router();
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+router.get("/", function (req, res, next) {
+  res.render("index", { title: "Express" });
 });
 
 module.exports = router;
 ```
 
 - user.js
+
 ```jsx
-var express = require('express');
+var express = require("express");
 var router = express.Router();
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+router.get("/", function (req, res, next) {
+  res.send("respond with a resource");
 });
 
 module.exports = router;
 ```
 
 - app.js
+
 ```jsx
-app.use('/', indexRouter); // 기본 시작 url
-app.use('/users', usersRouter); // 기본 url / users
+app.use("/", indexRouter); // 기본 시작 url
+app.use("/users", usersRouter); // 기본 url / users
 ```
+
 - 장고에서 config urls.py와 각 app별로 urls.py 두는 것이랑 비슷한 구조
 
 ### MVC란?
+
 - 웹 애플리케이션에서 일반적인 MVC 구성요소 다이어그램
-![이미지5](./docs/image4.png)
+  ![이미지5](./docs/image4.png)
 - **Model**: DB와의 커넥션을 담당하는 영역
+
   - default로 없으니, 만들어야 한다.
 
 - **View**: 결과물을 생성하는 영역 - reponse를 어떻게 보여줄지 처리하는 영역
+
   - views에서 이 역할을 함
   - ejs
   - template 엔진
   - 하지만, 우리는 react로 화면을 구성할 것이므로, view 폴더를 삭제
   - app.js에서 다음 코드 삭제
+
   ```jsx
   // view engine setup
-    app.set('views', path.join(__dirname, 'views'));
-    app.set('view engine', 'ejs');
+  app.set("views", path.join(__dirname, "views"));
+  app.set("view engine", "ejs");
   ```
-  - routes에서 `render`: view engine ->  삭제
+
+  - routes에서 `render`: view engine -> 삭제
   - 아래 코드 삭제
+
   ```jsx
-  res.render('index', { title: 'Express' });
+  res.render("index", { title: "Express" });
   ```
 
 - **Controller**: Model과 View를 핸들링하고, 로직을 처리하는 영역, request를 처리하는 영역 (장고에서 views.py)
   - routes가 이 역할을 함
 
 ### Express에서의 MVC
+
 ![이미지6](./docs/image5.png)
+
 - 라우팅: 라우팅은 애플리케이션 엔드포인트 (URI)의 정의, 그리고 URI가 클라이언트 요청에 응답하는 방식을 말합니다.
+
 ```jsx
-app.get('/', function(req, res){
+app.get("/", function (req, res) {
   console.log(req);
   console.log(req.header);
 
-  res.send('hello world');
-} )
+  res.send("hello world");
+});
 ```
+
 - **router는 controller이다!**
 - **우리가 할 것은?**
+
   - 어떤 메소드로 요청을 받을 것인가?
   - 어떤 URL로 요청을 받을 것인가?
   - 어떤 로직을 처리해줄 것인가?
   - 어떤 응답을 줄 것인가?
 
 - 라우터 만들기
+
 ```jsx
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
-router.get('/', (req, res)=>{
-    res.send("My First Board");
+router.get("/", (req, res) => {
+  res.send("My First Board");
 });
 
 module.exports = router;
 ```
-- 라우터 app에 등록
-```jsx
-const boardRouter = require('./routes/board');
 
-app.use('/board', boardRouter); // Express App에 사용하겠다고 등록해준다!
+- 라우터 app에 등록
+
+```jsx
+const boardRouter = require("./routes/board");
+
+app.use("/board", boardRouter); // Express App에 사용하겠다고 등록해준다!
 ```
 
+- 라우터는 순서가 중요하다!
+  - 위에서부터 아래로 떨어지기 때문에, 가장 먼저 충족하는 request에 대해 응답을 보내준다!
+
 ### Express.js에 Mongoose 사용하기
+
 - mongoDB에서 create cluster > driver 선택 > node.js로
 - `npm install mongoose`
 - app.js에 다음과 같이 추가
+
 ```jsx
 const mongoose = require("mongoose");
 mongoose
