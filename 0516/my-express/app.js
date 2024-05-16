@@ -14,6 +14,7 @@ mongoose
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 const boardRouter = require("./routes/board");
+const birdRouter = require("./routes/birds");
 
 var app = express();
 
@@ -24,6 +25,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/board", boardRouter); // Express App에 사용하겠다고 등록해준다!
+app.use("/birds", birdRouter);
 
 app.get("/", function (req, res) {
   res.send("hello world");
@@ -32,6 +34,7 @@ app.get("/", function (req, res) {
 app.post("/", function (req, res) {
   res.send("Post request가 왔습니다.");
 });
+
 
 // app.use('/', indexRouter); // 기본 시작 url
 // app.use('/users', usersRouter); // 기본 url / users
