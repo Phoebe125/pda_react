@@ -27,10 +27,10 @@
 
 ### RDB VS NOSQL
 1. SQL
-[이미지2](./docs/image1.png)
+![이미지2](./docs/image1.png)
 
 2. No SQL
-[이미지3](./docs/image2.png)
+![이미지3](./docs/image2.png)
 
 - 각자 개발하고자 하는 제품/서비스에 맞는 데이터 베이스면 모두 OK
 - DB의 신뢰성이 중요하면 -> RDBMS
@@ -44,8 +44,8 @@
 - Document는 RDBMS의 row와 유사한 개념으로 Json object 형태의 key-value의 쌍으로 이루어진 데이터 구조로 구성된다.
 - value에는 다른 document, array, document array가 포함될 수 있다.
 - MongoDB의 저장구조
-[이미지4](./docs/image3.png)
-  
+![이미지4](./docs/image3.png)
+
 - Database: RDB의 스키마
 - Collection: RDB의 테이블
 - Document: RDB의 Row => 각 Document는 _id라는 고유한 값을 가짐
