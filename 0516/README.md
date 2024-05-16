@@ -88,3 +88,117 @@
     "dev": "nodemon ./bin/www"
   },
 ```
+
+### 라우터
+- post는 여기로 가고~ board는 저기로 가고~ 이렇게 교통 정리해주는게 라우터
+- /routes: routing에 필요한 파일들 모아 있는 디렉토리 
+- 인자: serving할 url, controller
+
+- index.js
+```jsx
+var express = require('express');
+var router = express.Router();
+
+/* GET home page. */
+router.get('/', function(req, res, next) {
+  res.render('index', { title: 'Express' });
+});
+
+module.exports = router;
+```
+
+- user.js
+```jsx
+var express = require('express');
+var router = express.Router();
+
+/* GET users listing. */
+router.get('/', function(req, res, next) {
+  res.send('respond with a resource');
+});
+
+module.exports = router;
+```
+
+- app.js
+```jsx
+app.use('/', indexRouter); // 기본 시작 url
+app.use('/users', usersRouter); // 기본 url / users
+```
+- 장고에서 config urls.py와 각 app별로 urls.py 두는 것이랑 비슷한 구조
+
+### MVC란?
+- 웹 애플리케이션에서 일반적인 MVC 구성요소 다이어그램
+![이미지5](./docs/image4.png)
+- **Model**: DB와의 커넥션을 담당하는 영역
+  - default로 없으니, 만들어야 한다.
+
+- **View**: 결과물을 생성하는 영역 - reponse를 어떻게 보여줄지 처리하는 영역
+  - views에서 이 역할을 함
+  - ejs
+  - template 엔진
+  - 하지만, 우리는 react로 화면을 구성할 것이므로, view 폴더를 삭제
+  - app.js에서 다음 코드 삭제
+  ```jsx
+  // view engine setup
+    app.set('views', path.join(__dirname, 'views'));
+    app.set('view engine', 'ejs');
+  ```
+  - routes에서 `render`: view engine ->  삭제
+  - 아래 코드 삭제
+  ```jsx
+  res.render('index', { title: 'Express' });
+  ```
+
+- **Controller**: Model과 View를 핸들링하고, 로직을 처리하는 영역, request를 처리하는 영역 (장고에서 views.py)
+  - routes가 이 역할을 함
+
+### Express에서의 MVC
+![이미지6](./docs/image5.png)
+- 라우팅: 라우팅은 애플리케이션 엔드포인트 (URI)의 정의, 그리고 URI가 클라이언트 요청에 응답하는 방식을 말합니다.
+```jsx
+app.get('/', function(req, res){
+  console.log(req);
+  console.log(req.header);
+
+  res.send('hello world');
+} )
+```
+- **router는 controller이다!**
+- **우리가 할 것은?**
+  - 어떤 메소드로 요청을 받을 것인가?
+  - 어떤 URL로 요청을 받을 것인가?
+  - 어떤 로직을 처리해줄 것인가?
+  - 어떤 응답을 줄 것인가?
+
+- 라우터 만들기
+```jsx
+const express = require('express');
+const router = express.Router();
+
+router.get('/', (req, res)=>{
+    res.send("My First Board");
+});
+
+module.exports = router;
+```
+- 라우터 app에 등록
+```jsx
+const boardRouter = require('./routes/board');
+
+app.use('/board', boardRouter); // Express App에 사용하겠다고 등록해준다!
+```
+
+### Express.js에 Mongoose 사용하기
+- mongoDB에서 create cluster > driver 선택 > node.js로
+- `npm install mongoose`
+- app.js에 다음과 같이 추가
+```jsx
+const mongoose = require("mongoose");
+mongoose
+  .connect(
+    "mongodb+srv://sun:<password>@cluster0.lmbrrnm.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+  )
+  .then(() => console.log("Connected Successful"))
+  .catch((err) => console.log(err));
+```
