@@ -3,10 +3,12 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+require("dotenv").config();
+
 const mongoose = require("mongoose");
 mongoose
   .connect(
-    "mongodb+srv://sun:dltjsals84%23@cluster0.lmbrrnm.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+    `mongodb+srv://sun:${process.env.MONGODB_PASSWORD}@cluster0.lmbrrnm.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`
   )
   .then(() => console.log("Connected Successful"))
   .catch((err) => console.log(err));
