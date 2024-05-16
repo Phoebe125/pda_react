@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
 
 // Higher-Order Component
-export default function withUser(Component, callbackFn) {
+export default function withUser(Component) {
   return function WrappedComponent({ userId, ...props }) { // 나머지 객체를 props로 묶어서 받겠다
-    const result = callbackFn();
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
@@ -22,6 +21,6 @@ export default function withUser(Component, callbackFn) {
     if (loading) {
       return <p>Loading user...</p>;
     }
-    return <Component user={user} result={result} {...props} />; // props를 풀어서 받겠다
+    return <Component user={user} {...props} />; // props를 풀어서 받겠다
   };
 }

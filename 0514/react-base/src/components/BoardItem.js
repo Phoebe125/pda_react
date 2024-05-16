@@ -1,43 +1,31 @@
 import React, { useState } from "react";
-import axios from "axios";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-
-function postData(idx, body) {
-  const url = `https://jsonplaceholder.typicode.com/posts/${idx}`;
-  return axios
-    .put(url, JSON.stringify(body), {
-      headers: { "Content-type": "application/json; charset=UTF-8" },
-    })
-    .then((response) => response.data);
-}
+import { putPost } from "../apis/posts";
+import { delPosts } from "../apis/posts";
 
 export default function BoardItem({ elem, setDel, boardArr, setboardArr }) {
   const [update, setUpdate] = useState(false);
-  const [updateTitle, setUpdateTitle] = useState();
-  const [updateContent, setUpdateContent] = useState();
-  const titleHeight = "2.5rem";
+  const [updateTitle, setUpdateTitle] = useState("");
+  const [updateContent, setUpdateContent] = useState("");
+  const titleHeight = "2.4rem";
   const contentHeight = "170px";
 
   const deleteDiv = (e) => {
     const tmpArr = boardArr.filter(
       (item) =>
-        parseInt(item.id) !==
-        parseInt(e.target.parentNode.parentNode.id)
+        parseInt(item.id) !== parseInt(e.target.parentNode.parentNode.id)
     );
+    delPosts(parseInt(e.target.parentNode.id));
     setDel(e.target.parentNode.id);
     setboardArr(tmpArr);
   };
 
   const updateDiv = (e) => {
     const title =
-      e.target.parentNode.parentNode.querySelector(
-        ".title"
-      ).textContent;
+      e.target.parentNode.parentNode.querySelector(".title").textContent;
     const content =
-      e.target.parentNode.parentNode.querySelector(
-        ".content"
-      ).textContent;
+      e.target.parentNode.parentNode.querySelector(".content").textContent;
     setUpdate(!update);
     setUpdateTitle(title);
     setUpdateContent(content);
@@ -52,7 +40,7 @@ export default function BoardItem({ elem, setDel, boardArr, setboardArr }) {
       body: updateContent,
       userId: userId,
     };
-    postData(idx, body)
+    putPost(idx, body)
       .then((responses) => {
         let tmpArr = [];
         for (let i = 0; i < boardArr.length; i++) {
@@ -94,7 +82,14 @@ export default function BoardItem({ elem, setDel, boardArr, setboardArr }) {
       <Card.Body>
         <Card.Title className="title">
           <input
-            style={{ width: "100%", height: `${titleHeight}` }}
+            style={{
+              border: "solid 0.1px lightgray",
+              borderRadius: "10px",
+              width: "100%",
+              height: `${titleHeight}`,
+              fontSize: "1.2rem",
+              padding: "7px",
+            }}
             type="text"
             value={updateTitle}
             onChange={(e) => setUpdateTitle(e.target.value)}
@@ -102,17 +97,24 @@ export default function BoardItem({ elem, setDel, boardArr, setboardArr }) {
         </Card.Title>
         <Card.Text className="content">
           <textarea
-            style={{ width: "100%", height: `${contentHeight}` }}
+            style={{
+              border: "solid 0.1px lightgray",
+              borderRadius: "10px",
+              width: "100%",
+              height: `${contentHeight}`,
+              padding: "7px",
+
+            }}
             value={updateContent}
             onChange={(e) => setUpdateContent(e.target.value)}
           ></textarea>
         </Card.Text>
       </Card.Body>
-        <Card.Footer>
-          <Button variant="secondary" onClick={submitDiv}>
-            수정완료
-          </Button>
-        </Card.Footer>
+      <Card.Footer>
+        <Button variant="secondary" onClick={submitDiv}>
+          수정완료
+        </Button>
+      </Card.Footer>
     </Card>
   );
 }

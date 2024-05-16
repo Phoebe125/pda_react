@@ -1,41 +1,73 @@
-import React, {useState} from 'react'
-import axios from 'axios';
-import Card from "react-bootstrap/Card";
+import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
+import { putPosts } from "../apis/posts";
+import Modal from "react-bootstrap/Modal";
 
-function putData(body) {
-    const url = `https://jsonplaceholder.typicode.com/posts`;
-    return axios
-      .post(url, JSON.stringify(body), {
-        headers: { "Content-type": "application/json; charset=UTF-8" },
-      })
-      .then((response) => response.data);
+export default function InputItem({
+  show,
+  boardArr,
+  setboardArr,
+  handleClose,
+}) {
+  const [newTitle, setNewTitle] = useState('');
+  const [newContent, setNewContent] = useState('');
+
+  function submitItem() {
+    const idx = boardArr[boardArr.length - 1].id;
+    const userId = idx >= 10 ? Math.floor(idx / 10) + 1 : 1;
+    const body = { title: newTitle, body: newContent, userId: userId };
+    putPosts(body).then((resp) => {
+      setboardArr((prev) => [...prev, resp]);
+      setNewTitle("");
+      setNewContent("");
+      handleClose();
+    });
   }
 
-export default function InputItem({boardArr, setboardArr, setWriteMode}) {
-    const [newTitle, setNewTitle] = useState();
-    const [newContent, setNewContent] = useState();
+  return (
+    <Modal show={show} onHide={handleClose}>
+      <Modal.Header>
+        <Modal.Title>새로운 글 작성하기</Modal.Title>
+      </Modal.Header>
+      <Modal.Body style={{ textAlign: "center" }}>
+        <input
+          style={{
+            border: "solid 0.1px lightgray",
+            borderRadius: "10px",
+            width: "75%",
+            height: "3rem",
+            margin: "15px",
+            marginBottom: "10px",
+            padding: "10px",
+          }}
+          type="text"
+          value={newTitle}
+          placeholder="제목을 입력하세요"
+          onChange={(e) => setNewTitle(e.target.value)}
+        ></input>
+        <textarea
+          style={{
+            border: "solid 0.1px lightgray",
+            borderRadius: "10px",
+            width: "75%",
+            height: "300px",
+            margin: "15px",
+            padding: "10px",
+          }}
+          value={newContent}
+          placeholder="내용을 입력하세요"
+          onChange={(e) => setNewContent(e.target.value)}
+        ></textarea>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button variant="primary" onClick={submitItem}>
+          작성 완료
+        </Button>
 
-    function submitItem(){
-        const idx = boardArr[boardArr.length-1].id;
-        const userId = idx >= 10 ? Math.floor(idx / 10) + 1 : 1;
-        const body = {title: newTitle, body: newContent, userId:userId}
-        putData(body).then((resp) => {
-            console.log(resp);
-            setboardArr((prev)=>[...prev, resp]);
-            setNewTitle("");
-            setNewContent("");
-            setWriteMode(prev=>!prev);
-            }
-        )
-    }
-
-    return (
-    <div style={{display: "flex", flexDirection:"column", alignItems:"center", margin: "30px"}}>
-        <div style={{fontSize:"2rem"}}>새로운 글 작성하기</div>
-        <input style={{width: "500px"}} type="text" value={newTitle} onChange={(e)=>setNewTitle(e.target.value)}></input>
-        <textarea style={{width: "500px", height:"300px"}} value={newContent} onChange={(e)=>setNewContent(e.target.value)}></textarea>
-        <Button style={{width: "200px"}} variant="secondary" onClick={submitItem}>작성 완료</Button>
-    </div>
-  )
+        <Button variant="secondary" onClick={handleClose}>
+          Close
+        </Button>
+      </Modal.Footer>
+    </Modal>
+  );
 }
