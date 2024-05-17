@@ -138,3 +138,20 @@ Board.deleteMany({author: "작성자1"}).then(result=>{
 ```
   - 조건에 부합하는 데이터들을 삭제
 
+6. 데이터 업데이트
+```jsx
+Board.updateOne({ title: "제목2" }, { content: "내용2 수정" }).then(
+    (result) => {
+      res.json(result);
+    }
+  );
+```
+
+```jsx
+Board.updateMany({author:"작성자1"}, {author:"작성자3"}).then((data=>{
+    res.json(data);
+}))
+```
+  - 여러개 업데이트
+
+
