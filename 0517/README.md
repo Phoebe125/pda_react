@@ -115,6 +115,18 @@ Board.findById('6646a1ab07c1304fc44544d6').then(data=>{
 ```
   - 고유의 id 값으로 불러오기
 
+```jsx
+Board.find(
+    { 
+      num: {
+        $gt: 2
+      } 
+    }).then((result) => {
+    res.json(result);
+  });
+```
+  - num 이 2보다 큰 데이터
+
 
 5. 데이터 삭제
 ```jsx
@@ -155,3 +167,36 @@ Board.updateMany({author:"작성자1"}, {author:"작성자3"}).then((data=>{
   - 여러개 업데이트
 
 
+### MongoDB
+- Join 개념이 없도다!!!!
+- relation을 갖는 것 보다 참고하다고 보는게 좋음
+- Foriegn key라고 생각하는게 좋다.
+- 참조 키는 _id만 가능!
+- Join 연산이 많아지게 되면, 속도가 느려져서 일부러 중복을 허용하기도 함
+- 방법 1
+```jsx
+Board.findOne().then(board=>{
+    Comment.create({
+        content: "새로운 댓글입니다.",
+        author: "sys",
+        board: board
+    }).then(result=>{
+        res.json(result)
+    })
+})
+```
+- 방법 2
+```jsx
+Comment.create({
+  content: "다섯글자 이상 댓글입니다22",
+  author: "작성자3",
+  tags: ["Love", "Science"],
+  board: "6646b43a556a5b19e33d7d26", // ObjectId를 상수로써 구성해서 가져와야 함
+})
+.then((result) => {
+  res.json(result);
+})
+.catch((err) => {
+  console.log(err);
+});
+```
