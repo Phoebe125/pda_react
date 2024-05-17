@@ -4,36 +4,56 @@ const router = express.Router();
 const Board = require("../models/Board");
 const Comment = require("../models/Comment");
 
+// 0. 전체 Comment 확인하는 함수
 router.get("/", (req, res) => {
-  // Board 연동
-  //   Comment.create({
-  //     content: "다섯글자 이상 댓글입니다22",
-  //     author: "작성자3",
-  //     tags: ["Love", "Science"],
-  //     board: "6646b43a556a5b19e33d7d26", // ObjectId를 상수로써 구성해서 가져와야 함
-  //   })
-  //     .then((result) => {
-  //       res.json(result);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // Board 객체 전달
-  // Board.findOne().then(board=>{
-  //     Comment.create({
-  //         content: "새로운 댓글입니다.",
-  //         author: "sys",
-  //         board: board
-  //     }).then(result=>{
-  //         res.json(result)
-  //     })
-  // })
-  // 참조하고 있는 애들을 그대로 가져와서 객체로 만들래 -> populated
-  //   Comment.find()
-  //     .populate("board")
-  //     .then((result) => {
-  //       res.json(result);
-  //     });  
+  Comment.find().then((result) => {
+    res.json(result);
+  });
+});
+
+// 1. Comment를 추가하는 함수를 만드시오
+router.post("/", (req, res) => {
+  Comment.create({
+    content: req.body.content,
+    author: req.body.author,
+    board: req.body.board,
+    tags: req.body.tags,
+  }).then((result) => {
+    res.status(201).json(result);
+  });
+});
+
+// 2. Comment를 조회하는 함수를 만드시오
+router.get("/:commentId", (req, res) => {
+  Comment.findOne({ _id: req.params.commentId }).then((result) => {
+    res.status(200).json(result);
+  });
+});
+
+// 3. Comment를 수정하는 함수를 만드시오
+router.put("/:commentId", (req, res) => {
+  Comment.updateOne(
+    { _id: req.params.commentId },
+    {
+      content: req.body.content,
+      author: req.body.author,
+      board: req.body.board,
+      tags: req.body.tags,
+    }
+  ).then((result) => {
+    res.status(200).json(result);
+  });
+});
+
+// 4. Comment를 삭제하는 함수를 만드시오
+router.delete("/:commentId", (req, res) => {
+  Comment.deleteOne({ _id: req.params.commentId })
+    .then((result) => {
+      res.status(200).json(result);
+    })
+    .catch((err) => {
+      res.status(500).json(err);
+    });
 });
 
 module.exports = router;
