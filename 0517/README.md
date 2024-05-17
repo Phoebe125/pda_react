@@ -115,4 +115,26 @@ Board.findById('6646a1ab07c1304fc44544d6').then(data=>{
 ```
   - 고유의 id 값으로 불러오기
 
-  
+
+5. 데이터 삭제
+```jsx
+Board.deleteOne({title: "제목4"}).then(result=>{
+        res.json(result);
+    })
+```
+  - 제목이 제목4인 데이터 하나만 삭제
+```json
+{
+  "acknowledged": true,
+  "deletedCount": 1
+}
+```
+  - 이런식으로 response가 온다.
+
+```jsx
+Board.deleteMany({author: "작성자1"}).then(result=>{
+    res.json(result);
+})
+```
+  - 조건에 부합하는 데이터들을 삭제
+

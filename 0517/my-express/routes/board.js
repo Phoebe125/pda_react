@@ -58,8 +58,16 @@ router.get("/", (req, res) => {
     //     res.json(data);
     // })
 
-    Board.findById('6646a1ab07c1304fc44544d6').then(data=>{
-        res.json(data);
+    // Board.findById('6646a1ab07c1304fc44544d6').then(data=>{
+    //     res.json(data);
+    // })
+
+// 데이터 삭제
+    // Board.deleteOne({title: "제목4"}).then(result=>{
+    //     res.json(result);
+    // })
+    Board.deleteMany({author: "작성자1"}).then(result=>{
+        res.json(result);
     })
 });
 
