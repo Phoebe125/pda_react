@@ -50,6 +50,8 @@ const board = new Board({
     res.json(result);
   })
 ```
+  - 여기서 `board.save()` 한 객체는 프로미스 객체 이므로, .then 코드 필요함
+
   - 방법2
 ```jsx
 Board.create({
@@ -60,3 +62,57 @@ Board.create({
     res.json(result);
   });
 ```
+
+2. inser 여러개
+```jsx
+  Board.insertMany([
+    {
+      title: "제목3",
+      content: "내용3",
+      author: "작성자1",
+    },
+    {
+      title: "제목4",
+      content: "내용4",
+      author: "작성자1",
+    },
+  ])
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+```
+
+3. 데이터 조회
+```jsx
+Board.find().then(data=>{
+        res.json(data);
+    })
+```
+  - find 안에 아무런 조건을 주지 않으면, 전체 데이터를 조회한다.
+
+```jsx
+Board.findOne().then(data=>{
+        res.json(data);
+    })
+```
+  - 오직 한개만 반환하는 경우
+
+4. 데이터 조회에 조건 걸기
+```jsx
+Board.find({author: "작성자1"}).then(data=>{
+        res.json(data);
+    })
+```
+  - author가 작성자1인 모든 데이터를 가지고 오기
+
+```jsx
+Board.findById('6646a1ab07c1304fc44544d6').then(data=>{
+        res.json(data);
+    })
+```
+  - 고유의 id 값으로 불러오기
+
+  
