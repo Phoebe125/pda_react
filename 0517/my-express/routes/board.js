@@ -120,23 +120,28 @@ router.get("/", (req, res) => {
 
   // Board에서 num이 2보다 큰 (greater than) 데이터 조회
   // Board.find(
-  //   { 
+  //   {
   //     num: {
   //       $gte: 1
-  //     } 
+  //     }
   //   }).then((result) => {
   //   res.json(result);
   // });
 
   // Board에서 num이 5보다 작은 (less than: lt) 데이터 조회
-  Board.find(
-    { 
-      num: {
-        $lte: 5
-      } 
-    }).then((result) => {
-    res.json(result);
-  });
+  // Board.find(
+  //   {
+  //     num: {
+  //       $lte: 5
+  //     }
+  //   }).then((result) => {
+  //   res.json(result);
+  // });
+
+  Board.find()
+    .populate("comments")
+    .exec()
+    .then((result) => res.json(result));
 });
 
 module.exports = router;

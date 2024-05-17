@@ -200,3 +200,13 @@ Comment.create({
   console.log(err);
 });
 ```
+
+- 참조하는 객체 정보를 보고싶어! (left outer join 느낌)
+```jsx
+// 참조하고 있는 애들을 그대로 가져와서 객체로 만들래 -> populated
+Comment.find()
+.populate("board")
+.then((result) => {
+  res.json(result);
+});
+```
