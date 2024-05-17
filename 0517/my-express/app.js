@@ -7,9 +7,7 @@ require("dotenv").config();
 
 const mongoose = require("mongoose");
 mongoose
-  .connect(
-    `mongodb+srv://sun:${process.env.MONGODB_PASSWORD}@cluster0.lmbrrnm.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`
-  )
+  .connect(process.env.MONGO_URI)
   .then(() => console.log("Connected Successful"))
   .catch((err) => console.log(err));
 
