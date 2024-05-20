@@ -22,7 +22,7 @@ router.get("/", function (req, res, next) {
     req.session.viewCount = 1;
   }
   console.log(req.session);
-  res.send("Birds home page");
+  res.send(`Birds home page ${req.session.viewCount}번 호출`);
 });
 
 router.get("/about", function (req, res, next) {

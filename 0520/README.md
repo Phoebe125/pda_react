@@ -49,6 +49,18 @@ export function getBoard() {
 }
 ```
 
+### 인증에 대한 전체 흐름 이해하기
+- 인증방식에는 수많은 방식이 있다.
+  - JWT 토큰 방식
+  - SecureCookie를 이용한 SEssion Based 인증 방식
+  - Access Token & Refresh Token 방식
+  - OAuth 1.0 or OAuth 2.0
+
+- 하지만 핵심은 한가지이다.
+1. 서버가 인증 토큰을 발급하고 (어떤 형태든지)
+2. 클라이언트가 Request마다 이걸 보내고 (HTTP Message (Header or Body)에서)
+3. 서버는 내가 발급한 토큰이 맞는지 매번 확인하는 것!
+
 ### 인증
 
 [이미지](./docs/image1.png)
@@ -121,9 +133,9 @@ router.get("/", function (req, res, next) {
     -> 서버에 저장해야하는 데이터 (유저 로그인 정보 등)
 
   3. Cookie VS Session
+
   - 일반적으로 세션은 브라우저에 token (key)을 발급하고, 서버에는 해당 토큰을 key로 하는데 이터뭉치를 저장함. 이를 세션이라고 함
   - 브라우저는 token을 자체적으로 저장해야하는데, 주로 Cookie를 사용함
-
 
   ```jsx
   app.use(
@@ -140,3 +152,27 @@ router.get("/", function (req, res, next) {
   ```
 
   - 세션 라이브러리 설치: `npm install express-session`
+
+### 미들웨어
+
+- 라우팅 하기전에 공통된 작업을 처리해준다.
+- 각각 라우터에서 처리할 수 있지만, 그러면 코드의 중복이 많아지므로, 미들웨어에서 처리
+- EX. 로그인 되었는지 안되었는지 검증. 유저의 request들을 로그에 dump 시킴
+- app.js에서 `app.use()`가 미들웨어라고 보면 됨
+- router의 controller도 미들웨어이다.
+- 프레임워크마다 이름은 다르겠지만, 모든 프레임워크에 존재함
+
+### JWT
+
+- RESTful 서비스에서 주로 사용하는 인증방식, 토큰을 생성하는 방식
+- 헤더, 내용, 서명으로 이루어져 있음
+- 서명을 제외하곤 암호화되어있지 않음 (민감한 정보 금지)
+- 한번 발급된 토큰은 폐지 불가
+- 토큰을 StateLess하게 만들어서, 서버에 저장하지 않겠다는 것을 의미 -> 클라이언트단에서 없애지 않는 이상 토큰을 만료하지 않는다.
+- **토큰을 Session등 서버의 저장소에 저장하지 않고 검증하겠다는 의미**
+
+- **JWT 생성방식**
+![이미지](./docs/image7.png)
+
+- **JWT 검증방식**
+![이미지](./docs/image8.png)

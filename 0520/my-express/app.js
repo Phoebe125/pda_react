@@ -34,9 +34,14 @@ app.use(
 )
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/birds', (req, res, next)=>{
+  console.log("미들웨어 호출");
+  next(); // 다음 미들웨어를 실행하겠다. next 없으면, 다음 미들웨어 실행 안하겠다.
+})
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/birds', birdRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
