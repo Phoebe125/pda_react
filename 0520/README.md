@@ -51,28 +51,28 @@ export function getBoard() {
 
 ### 인증
 
-[](./docs/image1.png)
-[](./docs/image2.png)
+[이미지](./docs/image1.png)
+[이미지](./docs/image2.png)
 
 - Client가 매번 인증 토큰을 사용해야한다.
   - Client가 인증토큰을 매번 저장해 놓아야한다.
 - Server가 매번 인증토큰을 검증해야 한다.
   - Server가 인증 토큰을 매번 저장해 놓아야한다.
 
-[](./docs/image3.png)
+[이미지](./docs/image3.png)
 
 - **양쪽 모두에 토큰을 위한 저장소가 필요하다!**
 - Session: 논리적의 의미의 Session
 
 1. **쿠키란?**
 - 강의 교안 p.84
-   [](./docs/image4.png)
+   [이미지](./docs/image4.png)
 
 - 브라우저에서 쿠키 들어간 것 확인하는 방법
   - 응답 header에서 확인
-    [](./docs/image5.png)
+    [이미지](./docs/image5.png)
   - application > 쿠키 Tab에서 확인
-    [](./docs/image6.png)
+    [이미지](./docs/image6.png)
 
 ```jsx
 router.get("/", function (req, res, next) {
