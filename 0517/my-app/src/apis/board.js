@@ -1,7 +1,28 @@
 import axios from "axios";
 
-export function getBoard() {
-  const url = "/board";
-  const output = axios.get(url).then((response) => response.data);
-  return output;
+const BASE_URL = "/board";
+const service = axios.create({ baseURL: BASE_URL });
+
+export async function getBoard() {
+  const resp = await service.get("/");
+  return resp.data;
+}
+
+export async function deleteBoard(boardId) {
+  const resp = await service.delete(`/${boardId}`);
+  return resp.data;
+}
+
+export async function createBoard({ title, content, author }) {
+  const resp = await service.post("/", {
+    title: title,
+    content: content,
+    author: author,
+  });
+  return resp.data;
+}
+
+export async function fetchBoardItem(boardId) {
+  const resp = await service.get(`/${boardId}`);
+  return resp.data;
 }

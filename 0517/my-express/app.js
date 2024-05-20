@@ -21,8 +21,8 @@ var commentRouter = require("./routes/comment");
 var app = express();
 
 // cors
-const port = 3002;
-app.listen(port, ()=>console.log(`listening on port ${port}!`))
+// const port = 3002;
+// app.listen(port, ()=>console.log(`listening on port ${port}!`))
 // app.use(cors());
 
 // view engine setup

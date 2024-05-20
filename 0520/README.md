@@ -16,6 +16,7 @@
 
 **[해결방법]**
 1. cors 미들웨어 설치
+- 서버가 모든 요청에 대해 허용
 - `npm i cors`
 - 백엔드에서 app.js에 다음 코드 추가
 ```jsx
@@ -25,14 +26,10 @@ app.use(cors());
 
 2. proxy 서버 설정
 - 프로덕션 환경에서는 서로 다른 도메인에 호스팅된 애플리케이션과 API를 분리하여 배포할 수 있으며, 웹 서버나 클라우드 서비스를 사용하여 리버스 프록시를 설정할 수 있다!
-- express 백엔드에서 app.js에 다음 코드 추가
-```jsx
-const port = 3002;
-app.listen(port, ()=>console.log(`listening on port ${port}!`))
-```
+- 요청이 나갈때, 3001번 포트에서 나갔지만, 마치 3000번 포트에서 요청이 나간 거처럼 처리
 - react의 package.json에 다음 코드 추가
 ```json
-  "proxy":"http://localhost:3002"
+  "proxy":"http://localhost:3000"
 ```
 - 아래와 같이 axios 요청을 보내면, 잘 불러와진다!
 ```jsx
