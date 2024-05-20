@@ -16,14 +16,17 @@ router.get("/:boardId", (req, res) => {
   Board.findById(req.params.boardId)
     .populate("comments")
     .then((result) => {
-      res.json(result);
+      if (!result) {
+        res.status(404).send();
+      }
+      else{
+        res.json(result);
+      }
     });
 });
 
 // (/board) POST: 게시글 추가
 router.post("/", (req, res) => {
-  // console.log(req.body);
-  // console.log(req.headers);
   Board.create({
     title: req.body.title,
     content: req.body.content,
