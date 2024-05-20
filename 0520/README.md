@@ -65,8 +65,9 @@ export function getBoard() {
 - Session: 논리적의 의미의 Session
 
 1. **쿠키란?**
+
 - 강의 교안 p.84
-   [이미지](./docs/image4.png)
+  [이미지](./docs/image4.png)
 
 - 브라우저에서 쿠키 들어간 것 확인하는 방법
   - 응답 header에서 확인
@@ -94,6 +95,48 @@ router.get("/", function (req, res, next) {
 ```
 
 - 브라우저 콘솔 탭에서
+
   - `document.cookie` 쳐보면,
   - `httpOnly: false`로 설정한 쿠키에 접근 가능한 것을 알 수 있다. 자바스크립트에서 접근 가능
   - `httpOnly: true`는 자바스크립트에서 접근을 못하게 막는 설정이다. (브라우저 콘솔에서 구체적인 쿠키 값을 모르게)
+
+  ### Cookie VS Session
+
+  1. Cookie
+
+  - 쿠키는 서버에서 클라이언트에 저장시킬 수 있는 클라이언트 사이드 저장소
+  - 클라이언트 사이드 저장소이니 기본적으로 js가 접근이 가능하다!
+    -> 이에 따라 보안상 문제 발생 가능성!!
+    [보안을 위한 옵션]
+  - HTTP-Only 설정: Javascript에서 접근이 불가능하게 하고, HTTP통신으로만 전송 가능하다.
+  - Secure cookie: SSL 연결 (Https)을 통해서만 전송 가능하도록 함 -> 중간자 공격으로 인한 쿠키 탈취 방지
+  - request보낼때마다 요청 헤더에 cookie까지 포함해서 보냄
+
+  2. Session
+
+  - 세션은 Server Side 저장소 (논리적인 개념)
+  - 세션은 쿠키보다 더 안전하고 많은 데이터를 저장하는 저장 방식
+  - 쿠키의 경우 데이터를 사용자의 컴퓨터에 저장하기 때문에 비밀번호 같은 민감한 부분이라도 예외 없이 그대로 드러납니다.
+  - 하지만 세션은 데이터를 서버에 저장하기 때문에 쿠키보다 안전
+    -> 서버에 저장해야하는 데이터 (유저 로그인 정보 등)
+
+  3. Cookie VS Session
+  - 일반적으로 세션은 브라우저에 token (key)을 발급하고, 서버에는 해당 토큰을 key로 하는데 이터뭉치를 저장함. 이를 세션이라고 함
+  - 브라우저는 token을 자체적으로 저장해야하는데, 주로 Cookie를 사용함
+
+
+  ```jsx
+  app.use(
+    session({
+      secret: process.env.SESSION_SECRET || "<my-secret>",
+      resave: true,
+      saveUninitialized: true,
+      cookie: {
+        httpOnly: true,
+        secure: false,
+      },
+    })
+  );
+  ```
+
+  - 세션 라이브러리 설치: `npm install express-session`

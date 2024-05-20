@@ -14,13 +14,25 @@ router.get("/", (req, res) => {
 router.get("/:boardId", (req, res) => {
   // url에서 <:boardId> 부분을 req.params라는 객체의 boardId 키로 조회
   Board.findById(req.params.boardId)
-    .populate("comments")
-    .then((result) => {
-      if (!result) {
-        res.status(404).send();
-      }
-      else{
-        res.json(result);
+  .populate("comments")
+  .then((result) => {
+    if (!result) {
+      res.status(404).send();
+    } else {
+      res.json(result);
+      
+      // 상세 게시글을 방문할 때마다, 최근 방문한 게시글 (최대 10개)의 제목을 배열로 세션에 저장
+        if (req.session.boardPath) {
+          req.session.boardPath.push(result.title);
+        } else {
+          req.session.boardPath = [result.title];
+        }
+        req.session.save(err => {
+          if (err) {
+            console.error(err);
+          } else {
+            console.log("세션 저장 완료:", req.session.boardPath);
+          }})
       }
     });
 });
