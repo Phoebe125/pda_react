@@ -150,7 +150,7 @@ router.get("/", function (req, res, next) {
     })
   );
   ```
-
+  - Express는 자체적으로 세션을 사용하지 않음
   - 세션 라이브러리 설치: `npm install express-session`
 
 ### 미들웨어
