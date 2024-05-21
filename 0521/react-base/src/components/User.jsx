@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import { login } from "../apis/auth";
+import { clientLogin } from "./utils";
 
 export default function Login({ setUser }) {
   const [email, setEmail] = useState("");
@@ -12,6 +13,7 @@ export default function Login({ setUser }) {
   function submitInput() {
     login({ email, password }).then((resp) => {
       setUser(resp);
+      clientLogin(resp)
     });
   }
 

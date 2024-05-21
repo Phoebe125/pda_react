@@ -8,31 +8,20 @@ import Logout from "./Logout";
 import { TodoProvider } from "./useTodo";
 import Cookies from "js-cookie";
 import axios from "axios";
+import { getUserInfo } from "./utils";
 
 export default function Sample() {
   const [search, setSearch] = useState("");
-  const [user, setUser] = useState("");
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const token = Cookies.get("authToken");
-    console.log(token);
-    if (token) {
-      axios
-        .get("/users/verify-token", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((response) => {
-          console.log(response.data);
-          setUser(response.data);
-        });
-    }
+    const user = getUserInfo();
+    setUser(user||null);
   }, []);
 
   return (
     <div>
-      {user === "" ? (
+      {user === null ? (
         <Login setUser={setUser} />
       ) : (
         <div>

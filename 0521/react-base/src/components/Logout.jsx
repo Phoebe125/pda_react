@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import { logout } from "../apis/auth";
+import {clientLogout} from "./utils"
 
 export default function Logout({ user, setUser }) {
   function logoutBtn() {
     logout().then((resp) => {
-      setUser("");
+      setUser(null);
+      clientLogout();
     });
   }
   return (

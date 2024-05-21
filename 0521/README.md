@@ -133,3 +133,16 @@ module.exports = User;
 - 로그인: 입력한 password의 hashing 한 값과 저장한 값을 비교함
 
 - hashing 알고리즘의 특징: 같은 값을 넣으면, 동일한 값이 나옴 (단방향 해싱 알고리즘)
+
+### Client에서 토큰 값 / 로그인 정보를 저장함으로써 생기는 문제점
+- 비정상적인 움직임이 가능
+- 토큰 만료 되어도 로그인이 가능함
+- 하지만, 만일 서버 요청을 한다면, 실시간 유저의 로그인 정보를 알 수 있다.
+
+1. 서버에 요청을 한 번 더 보냄 (이 토큰 정보가 유효한거니~?)
+2. local storage 등 저장한다.
+
+
+### 기타 사항들..
+- Cookie VS Local Stoarge VS Session Storage
+![이미지](./docs/image.png)
