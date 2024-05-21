@@ -35,7 +35,7 @@ app.use(logger("dev")); // log 찍는 미들웨어
 app.use(express.json()); // request body json parse 해줌
 app.use(express.urlencoded({ extended: false })); // url parms parsing -> key-value 형태로 만들어줌
 app.use(cookieParser());
-app.use( 
+app.use(
   session({
     secret: process.env.SESSION_SECRET || "<my-secret>",
     resave: true,
@@ -46,7 +46,20 @@ app.use(
     },
   })
 );
+
+// 모든 요청 url의 path를 session의 배열로 관리하도록 함
+app.use((req, res, next) => {
+  if (!req.session.paths) {
+    req.session.paths = [];
+  }
+  req.session.paths.push(req.path);
+  next();
+});
+
 app.use(express.static(path.join(__dirname, "public")));
+
+const { authenticate } = require("./utils/auth");
+app.use(authenticate);
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
@@ -67,7 +80,8 @@ app.use(function (err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render("error");
+  res.render("error"); 
+  // res.json(err);
 });
 
 module.exports = app;

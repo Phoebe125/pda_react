@@ -1,5 +1,10 @@
 var express = require("express");
 var router = express.Router();
+const { loginRequired } = require("../utils/auth");
+
+router.get("/protected", loginRequired, (req, res) => {
+  res.send("Protected Resource!!");
+});
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
@@ -8,7 +13,7 @@ router.get("/", function (req, res, next) {
   } else {
     req.session.viewCount = 1;
   }
-//   console.log(req.session);
+  //   console.log(req.session);
   res.send(`Birds home page ${req.session.viewCount}번 호출`);
 });
 
