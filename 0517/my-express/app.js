@@ -25,7 +25,7 @@ var app = express();
 // cors
 // const port = 3002;
 // app.listen(port, ()=>console.log(`listening on port ${port}!`))
-// app.use(cors());
+app.use(cors());
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
