@@ -50,3 +50,16 @@
 - 만약 React로 구성하되 ServerSide에서 그림을 그리고 싶으면? **SSR**
 - 브라우저에서 하는 것처럼 React실행을 서버에서 한 번 해주면 됨
 - 이를 지원하는 라이브러리 혹은 함수 존재! 장단점을 생각하자!!
+
+### Vite로 시작하기
+
+- React를 시작할때 전통적으로 Webpack이 강자였고, webpack 기반으로 하는 create-react-app이 대세였다.
+- 최근에 vite가 나와서 vite를 자주 사용하기도 한다!
+  `npm create vite@latest my-react-router -- --template react`
+- 폴더 들어가서 `npm install` 까지 해준다!
+- 패키지 설치하기: `npm install react-router-dom localforage match-sorter sort-by`
+- 진입 지점: `/src/main.jsx`
+
+
+### 참고로..
+- anchor 태그로 이동하는 건 Server-Side routing이다.
