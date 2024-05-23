@@ -1,5 +1,12 @@
-import { Route, Routes, RouterProvider, BrowserRouter, Link } from "react-router-dom";
+import {
+  Route,
+  Routes,
+  RouterProvider,
+  BrowserRouter,
+  Link,
+} from "react-router-dom";
 import { routerObj } from "./main-router";
+import { useState } from "react";
 
 function renderRoutes(routesObj) {
   return routesObj.map((route) => {
@@ -28,6 +35,8 @@ function renderRoutes(routesObj) {
 
 function App() {
   // return <RouterProvider router={MainRouter}></RouterProvider>;
+  const [auth, useAuth] = useState();
+
   return (
     <BrowserRouter>
       <div>
@@ -39,7 +48,6 @@ function App() {
       <div>
         <Link to="/board/write">글쓰기 페이지</Link>
       </div>
-
       <Routes>{renderRoutes(routerObj)}</Routes>
     </BrowserRouter>
   );

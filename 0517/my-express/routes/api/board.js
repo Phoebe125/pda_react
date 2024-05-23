@@ -5,7 +5,6 @@ const Board = require("../../models/Board");
 
 // (/board) GET: 전체 게시글 조회
 router.get("/", (req, res) => {
-  console.log(req.session.boardPath);
   Board.find().then((result) => {
     res.json(result);
   });
@@ -22,16 +21,14 @@ function trackBoard(sess, boardTitle) {
 
 // (/board/:boardId) GET: <:boardId>에 해당하는 게시글 조회
 router.get("/:boardId", (req, res) => {
-  // url에서 <:boardId> 부분을 req.params라는 객체의 boardId 키로 조회
   Board.findById(req.params.boardId)
-    .populate("comments")
     .then((result) => {
       if (!result) {
         res.status(404).send();
       } else {
         trackBoard(req.session, result.title);
         res.json(result);
-        
+
         // console.log(req.session.boardPath);
 
         // 상세 게시글을 방문할 때마다, 최근 방문한 게시글 (최대 10개)의 제목을 배열로 세션에 저장

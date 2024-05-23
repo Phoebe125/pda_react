@@ -14,11 +14,13 @@ mongoose
   .then(() => console.log("Connected Successful"))
   .catch((err) => console.log(err));
 
-var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
-var boardRouter = require("./routes/board");
-var commentRouter = require("./routes/comment");
-const birdRouter = require("./routes/birds");
+// var indexRouter = require("./routes/index");
+// var usersRouter = require("./routes/users");
+// var boardRouter = require("./routes/board");
+// var commentRouter = require("./routes/comment");
+// const birdRouter = require("./routes/birds");
+
+const apiRouter = require('./routes/api');
 
 var app = express();
 
@@ -61,11 +63,12 @@ app.use(express.static(path.join(__dirname, "public")));
 const { authenticate } = require("./utils/auth");
 app.use(authenticate);
 
-app.use("/", indexRouter);
-app.use("/users", usersRouter);
-app.use("/board", boardRouter);
-app.use("/comment", commentRouter);
-app.use("/birds", birdRouter);
+// app.use("/", indexRouter);
+// app.use("/users", usersRouter);
+// app.use("/board", boardRouter);
+// app.use("/comment", commentRouter);
+// app.use("/birds", birdRouter);
+app.use("/api", apiRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -4,6 +4,8 @@ import { BoardListPage } from "./routes/board/page";
 import { BoardLayout } from "./routes/board/layout";
 import BoardWritepage from "./routes/board/write/page";
 import BoardDetailPage from "./routes/board/detail/page";
+import SignupPage  from "./routes/user/signup";
+import LoginPage from "./routes/user/login";
 
 export const routerObj = [
   {
@@ -30,6 +32,14 @@ export const routerObj = [
         index: true,
         element: <BoardWritepage />,
       },
+    ],
+  },
+  {
+    path: "/user",
+    element: <BoardLayout />,
+    children: [
+      { path: "login", index: true, element: <LoginPage /> },
+      { path: "signup", index: true, element: <SignupPage /> },
     ],
   },
 ];
