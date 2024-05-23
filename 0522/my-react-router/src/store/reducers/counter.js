@@ -4,9 +4,9 @@ const initialState = {
 };
 
 // Action Type
-export const INCREASE_COUNTER = "counter /INCREASE_COUNTER";
-export const DECREASE_COUNTER = "counter /DECREASE_COUNTER";
-export const SET_COLOR = "counter /SET_COLOR";
+export const INCREASE_COUNTER = "counter/INCREASE_COUNTER";
+export const DECREASE_COUNTER = "counter/DECREASE_COUNTER";
+export const SET_COLOR = "counter/SET_COLOR";
 
 // Action Creator
 export const increaseCounter = () => ({
@@ -20,7 +20,7 @@ export const decreaseCounter = () => ({
 });
 
 export const setColor = (color) => ({
-  typ: SET_COLOR,
+  type: SET_COLOR,
   payload: {
     color,
   },

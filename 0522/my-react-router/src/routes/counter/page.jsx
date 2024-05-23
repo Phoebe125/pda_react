@@ -7,6 +7,7 @@ import {
   decreaseCounter,
   setColor,
 } from "~/store/reducers/counter";
+import ColorInput from "../../components/ColorInput";
 
 export default function CounterPage() {
   const counter = useSelector((state) => state.counter);
@@ -15,6 +16,11 @@ export default function CounterPage() {
   return (
     <div>
       <div>CounterPage</div>
+
+      <div>
+        <ColorInput/>
+      
+      </div>
       <div style={{ display: "flex", flexDirection: "row" }}>
         <button
           onClick={(e) => {
