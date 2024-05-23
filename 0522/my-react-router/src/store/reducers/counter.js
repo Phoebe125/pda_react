@@ -27,7 +27,7 @@ export const setColor = (color) => ({
 });
 
 function counterReducer(state = initialState, action) {
-  switch (action.type) {
+  switch (action.type) { // action.type: 어떤 주문을 했는지 확인하는 것
     case INCREASE_COUNTER:
       return {
         ...state,

@@ -4,8 +4,9 @@ import { BoardListPage } from "./routes/board/page";
 import { BoardLayout } from "./routes/board/layout";
 import BoardWritepage from "./routes/board/write/page";
 import BoardDetailPage from "./routes/board/detail/page";
-import SignupPage  from "./routes/user/signup";
+import SignupPage from "./routes/user/signup";
 import LoginPage from "./routes/user/login";
+import CounterPage from "./routes/counter/page";
 
 // export const routerObj = [
 //   {
@@ -65,6 +66,10 @@ const MainRouter = createBrowserRouter([
         element: <BoardWritepage />,
       },
     ],
+  },
+  {
+    path: "/counter",
+    element: <CounterPage />,
   },
 ]);
 
