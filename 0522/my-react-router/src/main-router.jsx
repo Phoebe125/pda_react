@@ -66,6 +66,11 @@ const MainRouter = createBrowserRouter([
         index: true,
         element: <BoardWritepage />,
       },
+      {
+        // parameter 전달받기
+        path: ":boardId",
+        element: <BoardDetailPage />,
+      },
     ],
   },
   {
