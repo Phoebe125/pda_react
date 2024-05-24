@@ -7,6 +7,7 @@ import BoardDetailPage from "./routes/board/detail/page";
 import SignupPage from "./routes/user/signup";
 import LoginPage from "./routes/user/login";
 import CounterPage from "./routes/counter/page";
+import TodoPage from "./routes/todo/page";
 
 // export const routerObj = [
 //   {
@@ -70,6 +71,10 @@ const MainRouter = createBrowserRouter([
   {
     path: "/counter",
     element: <CounterPage />,
+  },
+  {
+    path: "/todo",
+    element: <TodoPage />,
   },
 ]);
 

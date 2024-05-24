@@ -9,7 +9,7 @@ export default function ColorInput() {
         type="color"
         onChange={(e) => {
           const color = e.target.value;
-          const action = setColor(color); // 주문서
+          const action = setColor({ color }); // 주문서
           //   주문서 제출
           dispatch(action);
         }}
