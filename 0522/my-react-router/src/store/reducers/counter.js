@@ -14,9 +14,8 @@ const initialState = {
  * 2. actionCreator를 정의 (<reducer이름>)
  * 3. immer.js 라이브러리 적용. (원래 reducer는 새로운 state를 반환해야 함. = 기존 state 직접 변경 X)
  *   -> immer.j 라이브러리를 사용하면 state를 직접 변경하는 것처럼 코드 작성 가능.
- * 
+ *
  */
-
 
 const counterSlice = createSlice({
   name: "counter",
@@ -36,8 +35,5 @@ const counterSlice = createSlice({
 
 export const { increaseCounter, decreaseCounter, setColor } =
   counterSlice.actions;
-console.log(increaseCounter());
-console.log(decreaseCounter());
-console.log(setColor({color: "black"}));
 
 export default counterSlice.reducer;
